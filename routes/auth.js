@@ -11,7 +11,11 @@ router.get('/login/success', authCheck, (req, res) => {
     res.status(200).json({
         success: true,
         message: 'Success',
-        user: req.user,
+        user: {
+            firstName: req.user.firstName,
+            lastName: req.user.lastName,
+            profilePicture: req.user.profilePicture,
+        },
         // cookies: req.cookies
     });
 });
