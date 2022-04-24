@@ -1,6 +1,8 @@
+const ErrorResponse = require("../util/errorResponse");
+
 authCheck = (req, res, next) => {
     if (!req.user) {
-        return next(new Error('Not authorized to access this route', 401));
+        return next(new ErrorResponse('Not authorized to access this route', 401));
     } else {
         next();
     }

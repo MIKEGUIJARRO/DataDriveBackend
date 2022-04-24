@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID_GOOGLE,
     clientSecret: process.env.CLIENT_SECRET_GOOGLE,
-    callbackURL: '/api/v1/auth/google/callback',
+    callbackURL: process.env.CALLBACK_URL_GOOGLE,
     passReqToCallback: true,
 }, function (req, accessToken, refreshToken, profile, done) {
     // Documentation
@@ -33,6 +33,7 @@ passport.use(new GoogleStrategy({
                     lastName: profile.name.familyName,
                     googleId: profile.id,
                     profilePicture: profile._json.picture,
+                    googleRefreshToken: refreshToken,
                 });
 
                 newUser.save().then((newUser) => {
