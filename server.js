@@ -23,6 +23,7 @@ const cookieSession = require('cookie-session');
 //Routes
 const powerStudentsRoute = require('./routes/powerschool/students');
 const authRoute = require('./routes/auth');
+const driveRoute = require('./routes/drive');
 
 // Connect to DB
 connectDB();
@@ -61,6 +62,7 @@ app.use(cors({
 // Routes
 app.use('/api/v1/students', powerStudentsRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/drive', driveRoute);
 
 // Error Handler
 app.use(errorHandler);

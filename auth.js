@@ -28,16 +28,16 @@ passport.use(new GoogleStrategy({
                 done(null, currentUser);
             } else {
                 // Creates a new user in our db
+                
+                // Get new google public url here
                 const newUser = new User({
                     firstName: profile.name.givenName,
                     lastName: profile.name.familyName,
                     googleId: profile.id,
-                    profilePicture: profile._json.picture,
                     googleRefreshToken: refreshToken,
                 });
-
                 newUser.save().then((newUser) => {
-                    console.log('created new user: ', newUser);
+                    console.log('Created new user: ', newUser);
                     done(null, newUser);
                 });
             }

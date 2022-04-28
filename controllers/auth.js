@@ -31,7 +31,10 @@ module.exports.getGoogle = passport.authenticate('google', {
     scope: [
         'profile',
         'https://www.googleapis.com/auth/drive',
-        'https://www.googleapis.com/auth/drive.file'
+        'https://www.googleapis.com/auth/drive.file',
+        'https://www.googleapis.com/auth/admin.directory.user',
+        // Used for getting profile pic
+        'https://www.googleapis.com/auth/contacts'
     ],
     accessType: 'offline',
 });
