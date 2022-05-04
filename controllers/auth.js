@@ -32,9 +32,12 @@ module.exports.getGoogle = passport.authenticate('google', {
         'profile',
         'https://www.googleapis.com/auth/drive',
         'https://www.googleapis.com/auth/drive.file',
-        'https://www.googleapis.com/auth/admin.directory.user',
+        // Used to get the drave text metadata
+        'https://www.googleapis.com/auth/drive.metadata',
         // Used for getting profile pic
-        'https://www.googleapis.com/auth/contacts'
+        'https://www.googleapis.com/auth/contacts',
+        // 
+        'https://www.googleapis.com/auth/drive.readonly'
     ],
     accessType: 'offline',
 });
