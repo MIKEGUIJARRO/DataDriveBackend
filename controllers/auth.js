@@ -46,5 +46,6 @@ module.exports.getGoogle = passport.authenticate('google', {
 
 module.exports.getGoogleCallback = passport.authenticate('google', {
     successRedirect: `${CLIENT_URL}/home`,
-    failureRedirect: '/login/failed'
+    failureRedirect: '/login/failed',
+    session: true,
 });
