@@ -52,7 +52,7 @@ app.use(passport.session());
 
 // Cors Config
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://datadrivefrontend.herokuapp.com',
     methods: "GET,POST,PUT,DELETE",
     credentials: true
 }));
