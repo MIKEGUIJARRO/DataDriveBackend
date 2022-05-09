@@ -43,7 +43,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cookieSession({
     name: 'datadrive',
     keys: ['dd'],
-    maxAge: 24 * 60 * 60 * 100
+    maxAge: 24 * 60 * 60 * 100,
+    secret: 'stackoverflow',
 }));
 
 // Passport Config

@@ -7,7 +7,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET_GOOGLE,
     callbackURL: process.env.CALLBACK_URL_GOOGLE,
     passReqToCallback: true,
-    proxy: true 
+    proxy: true
 }, function (req, accessToken, refreshToken, profile, done) {
     // Documentation
     // https://www.passportjs.org/concepts/authentication/google/
@@ -29,7 +29,7 @@ passport.use(new GoogleStrategy({
                 done(null, currentUser);
             } else {
                 // Creates a new user in our db
-                
+
                 // Get new google public url here
                 const newUser = new User({
                     firstName: profile.name.givenName,
@@ -53,13 +53,13 @@ passport.use(new GoogleStrategy({
 
 // What are these functions used for?
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    return done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
     try {
         User.findById(id).then((user) => {
-            done(null, user);
+            return done(null, user);
         });
     } catch (e) {
         console.log('Error serializing');
