@@ -29,7 +29,7 @@ passport.use(new GoogleStrategy({
                 done(null, currentUser);
             } else {
                 // Creates a new user in our db
-
+                console.log('Profile PreSave: ', profile);
                 // Get new google public url here
                 const newUser = new User({
                     firstName: profile.name.givenName,
