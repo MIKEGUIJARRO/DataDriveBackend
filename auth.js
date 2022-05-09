@@ -7,6 +7,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET_GOOGLE,
     callbackURL: process.env.CALLBACK_URL_GOOGLE,
     passReqToCallback: true,
+    proxy: true 
 }, function (req, accessToken, refreshToken, profile, done) {
     // Documentation
     // https://www.passportjs.org/concepts/authentication/google/
