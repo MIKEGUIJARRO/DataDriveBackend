@@ -3,7 +3,13 @@ const User = require('../models/User');
 const { google } = require('googleapis');
 const ErrorResponse = require('../util/errorResponse');
 
-const { getFolderData, getFilePlaceHolders, getFileData, getFilePDF } = require('../util/drive');
+const { getFolderData,
+    getFilePlaceHolders,
+    getFileData,
+    getBufferPDF,
+    copyFile,
+    deleteFile,
+    replaceTextFile } = require('../util/drive');
 
 module.exports.getFiles = async (req, res, next) => {
     try {
@@ -74,13 +80,18 @@ module.exports.getPDFFile = async (req, res, next) => {
         const currentUser = await User.find({ googleId: req.user.googleId });
         const refreshToken = currentUser[0].googleRefreshToken;
 
-        await getFilePDF(refreshToken, fileId, req.user.googleId);
-
-
+        const resDoc = await copyFile(refreshToken, fileId);
+        const copyDocId = resDoc.id;
+        await replaceTextFile(refreshToken, copyDocId, keywords);
+        const base64 = await getBufferPDF(refreshToken, copyDocId);
+        await deleteFile(refreshToken, copyDocId);
+        // console.log(keywords)
         res.status(200).json({
             success: true,
             count: 0,
-            data: {}
+            data: {
+                arrayBuffer: base64
+            }
         });
     } catch (e) {
         console.log(e);

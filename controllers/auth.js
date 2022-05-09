@@ -37,7 +37,9 @@ module.exports.getGoogle = passport.authenticate('google', {
         // Used for getting profile pic
         'https://www.googleapis.com/auth/contacts',
         // 
-        'https://www.googleapis.com/auth/drive.readonly'
+        'https://www.googleapis.com/auth/drive.readonly',
+        // Google docs
+        'https://www.googleapis.com/auth/documents',
     ],
     accessType: 'offline',
 });

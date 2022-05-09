@@ -75,24 +75,101 @@ const getFileData = async (refreshToken, fileId) => {
     });
     console.log(file.data.thumbnailLink);
 
-    file.data.thumbnailLink = file.data.thumbnailLink.replace('sz=s220', 'sz=s800');
+    file.data.thumbnailLink = file.data.thumbnailLink.replace('sz=s220', 'sz=s1600');
     return file.data;
 }
 
-const getFilePDF = async (refreshToken, fileId, googleId) => {
+const getBufferPDF = async (refreshToken, fileId) => {
     const oauth2Client = setupOAuth(refreshToken);
     const drive = google.drive({ version: 'v3', auth: oauth2Client });
-    const file = await drive.files.get({
+    const res = await drive.files.export({
         fileId: fileId,
+        mimeType: 'application/pdf',
         key: process.env.GOOGLE_API_KEY,
-        alt: 'media'
-    });
+    }, {
+        responseType: 'arraybuffer'
+    })
+    return Buffer.from(res.data).toString('base64');
+}
 
-    const filename = fileId + googleId;
-    console.log(file);
+const copyFile = async (refreshToken, fileId) => {
+    try {
+        const oauth2Client = setupOAuth(refreshToken);
+        const drive = google.drive({ version: 'v3', auth: oauth2Client });
+        const res = await drive.files.copy({
+            fileId: fileId,
+            key: process.env.GOOGLE_API_KEY,
+        });
+
+        console.log(res);
+        return res.data;
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
+const deleteFile = async (refreshToken, fileId) => {
+    try {
+        const oauth2Client = setupOAuth(refreshToken);
+        const drive = google.drive({ version: 'v3', auth: oauth2Client });
+        const res = await drive.files.delete({
+            fileId: fileId,
+            key: process.env.GOOGLE_API_KEY
+        })
+        console.log(res)
+        return res.data;
+    } catch (e) {
+        console.log(e)
+    }
+}
 
+const replaceTextFile = async (refreshToken, fileId, keywords) => {
+    // https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate
+    // https://stackoverflow.com/questions/67756059/how-to-update-specific-text-in-google-drive-docs-with-node-js-name
+    try {
+        const oauth2Client = setupOAuth(refreshToken);
+        const docs = google.docs({ version: 'v1', auth: oauth2Client });
 
-module.exports = { getFolderData, getFilePlaceHolders, getUserProfilePic, getFileData, getFilePDF };
+        const requests = [];
+        for (const key in keywords) {
+            requests.push({
+                replaceAllText: {
+                    containsText: {
+                        text: `{{${key}}}`,
+                        matchCase: true,
+                    },
+                    replaceText: keywords[key],
+                },
+            })
+        }
+
+        const res = await docs.documents.batchUpdate({
+            documentId: fileId,
+
+            // Request body metadata
+            requestBody: {
+                // request body parameters
+                'requests': requests,
+                'writeControl': {}
+            },
+
+        });
+
+        console.log(res)
+        return res.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+module.exports = {
+    getFolderData,
+    getFilePlaceHolders,
+    getUserProfilePic,
+    getFileData,
+    getBufferPDF,
+    copyFile,
+    deleteFile,
+    replaceTextFile
+};
