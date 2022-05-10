@@ -23,13 +23,13 @@ passport.use(new GoogleStrategy({
 
     // check if user already exists in our own db
     try {
+        console.log('Profile PreSave: ', profile);
         User.findOne({ googleId: profile.id }).then((currentUser) => {
             if (currentUser) {
                 // This user already exists
                 done(null, currentUser);
             } else {
                 // Creates a new user in our db
-                console.log('Profile PreSave: ', profile);
                 // Get new google public url here
                 const newUser = new User({
                     firstName: profile.name.givenName,
