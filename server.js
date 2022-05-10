@@ -54,7 +54,7 @@ app.use(passport.session());
 
 // Cors Config
 app.use(cors({
-    origin: 'https://datadrivefrontend.herokuapp.com',
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true
 }));
