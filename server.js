@@ -44,8 +44,8 @@ app.use(cookieSession({
     name: 'datadrive',
     keys: ['dd'],
     maxAge: 24 * 60 * 60 * 100,
-    secret: 'stackoverflow',
-    sameSite: 'none'
+    sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+    secure: process.env.NODE_ENV === "production"
 }));
 
 // Passport Config
