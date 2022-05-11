@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.set("trust proxy", 1);
-
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
 // Cookies
 app.use(cookieSession({
     name: 'datadrive',
