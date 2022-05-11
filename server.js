@@ -39,10 +39,13 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+app.set("trust proxy", 1);
+
 // Cookies
 app.use(cookieSession({
     name: 'datadrive',
     keys: ['dd'],
+    secret: 'anotherSecret',
     maxAge: 24 * 60 * 60 * 100,
     sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
     secure: process.env.NODE_ENV === "production"
@@ -58,8 +61,6 @@ app.use(cors({
     methods: "GET,POST,PUT,DELETE",
     credentials: true
 }));
-
-//passport.use(User.createStrategy())
 
 // Routes
 app.use('/api/v1/students', powerStudentsRoute);
