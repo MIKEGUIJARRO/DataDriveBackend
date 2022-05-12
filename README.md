@@ -18,7 +18,7 @@ At work I am required to create templates on google drive, update the placeholde
 
 ## Web app Architecture 🏗
 <h2 align="center">
-  <a href="https://datadrive.netlify.app" target="_blank"> 
+  <a href="https://lucid.app/documents/view/6b0b90a6-9bd8-47a7-93ce-82432da7dc49" target="_blank"> 
     <img src="./architecture.png" alt="Look up!" width="100%" />
   </a>
   <br>
