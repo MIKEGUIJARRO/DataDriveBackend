@@ -1,6 +1,4 @@
-const { auth } = require('google-auth-library');
 const { google } = require('googleapis');
-const { drive } = require('googleapis/build/src/apis/drive');
 const textSearchAlgo = require('./textSearchAlgo');
 
 const setupOAuth = (refreshToken) => {
