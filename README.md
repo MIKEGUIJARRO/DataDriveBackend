@@ -23,6 +23,7 @@ At work I am required to create templates on google drive, update the placeholde
 ⚡️ Protected routes\
 ⚡️ String Algorithms and Data Structures implemented \
 ⚡️ Error management
+⚡️ Deployed on Heroku
 
 To view this webpage, **[click here](https://datadrive.netlify.app/)**
 
@@ -31,7 +32,7 @@ To view this webpage, **[click here](https://datadrive.netlify.app/)**
 - [MongoDB](https://www.mongodb.com/) - NoSQL database
 - [Goodle API](https://www.npmjs.com/package/googleapis) - programmatic interfaces to Google Cloud Platform services
 - [Algorithms and Data Structures](https://heroicons.com/) - High performance string recognition algo
-- [Framer Motion](https://www.framer.com/motion/) - Motion library for React
+-  [Heroku](https://www.heroku.com/) - a Cloud platform as a service supporting several programming languages
 
 
 ## Other resources 🧬
