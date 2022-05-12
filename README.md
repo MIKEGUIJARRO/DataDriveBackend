@@ -21,7 +21,7 @@ At work I am required to create templates on google drive, update the placeholde
 ⚡️ Cookie session\
 ⚡️ Google Auth 2.0\
 ⚡️ Protected routes\
-⚡️ String Algorithms and Data Structures implemented \
+⚡️ Algorithms and Data Structures implemented \
 ⚡️ Error management
 ⚡️ Deployed on Heroku
 
