@@ -48,11 +48,8 @@ module.exports.getKeywordTemplates = async (req, res, next) => {
 
         const refreshToken = currentUser[0].googleRefreshToken;
 
-        const { keywords, isDuplicate } = await getFilePlaceHolders(refreshToken, fileId, req.user.googleId);
+        const keywords = await getFilePlaceHolders(refreshToken, fileId, req.user.googleId);
         const fileData = await getFileData(refreshToken, fileId)
-        if (isDuplicate) {
-            return next(new ErrorResponse('Duplicate Template Word', 400))
-        }
 
         res.status(200).json({
             success: true,

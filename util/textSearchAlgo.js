@@ -32,8 +32,19 @@ const textSearchAlgo = (strText) => {
 
         i++;
     }
-    const isDuplicate = hasDuplicates(keywords);
-    return { keywords, isDuplicate };
+
+    const reducedKeywords = removeDuplicates(keywords);
+    return reducedKeywords;
+}
+
+const removeDuplicates = (arrayStr) => {
+    const arrayStrDuplicate = [];
+    for (const str of arrayStr) {
+        if (!arrayStrDuplicate.includes(str)) {
+            arrayStrDuplicate.push(str);
+        }
+    }
+    return arrayStrDuplicate;
 }
 
 const hasDuplicates = (arrayOfStr) => {
